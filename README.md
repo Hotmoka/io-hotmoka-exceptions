@@ -1,4 +1,4 @@
-[![Java-Build Action Status](https://github.com/Hotmoka/websockets/actions/workflows/java_build.yml/badge.svg)](https://github.com/Hotmoka/io-hotmoka-exceptions/actions)
+[![Java-Build Action Status](https://github.com/Hotmoka/io-hotmoka-exceptions/actions/workflows/java_build.yml/badge.svg)](https://github.com/Hotmoka/io-hotmoka-exceptions/actions)
 [![Maven Central](https://img.shields.io/maven-central/v/io.hotmoka.exceptions/io-hotmoka-exceptions.svg?label=Maven%20Central)](https://central.sonatype.com/search?smo=true&q=g:io.hotmoka.exceptions)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
@@ -14,7 +14,7 @@ exceptions before using the code with the stream library, and then check them ba
 <p align="center"><img width="100" src="pics/CC_license.png" alt="This documentation is licensed under a Creative Commons Attribution 4.0 Internat
 ional License"></p><p align="center">This document is licensed under a Creative Commons Attribution 4.0 International License.</p>
 
-<p align="center">Copyright 2024 by Fausto Spoto (fausto.spoto@hotmoka.io)</p>
+<p align="center">Copyright 2023 by Fausto Spoto (fausto.spoto@hotmoka.io)</p>
 
 ## Example
 
