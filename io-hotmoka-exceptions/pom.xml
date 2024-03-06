@@ -10,7 +10,7 @@
   <description>This module defines methods for dealing with functional interfaces that might throw exceptions.</description>
 
   <parent>
-    <groupId>io.hotmoka.exceptions</groupId>
+    <groupId>io.hotmoka</groupId>
     <artifactId>io-hotmoka-exceptions-parent</artifactId>
     <version>parent</version>
   </parent>
