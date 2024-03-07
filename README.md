@@ -11,11 +11,6 @@ that forbid one to throw checked exceptions. Therefore, this makes it difficult 
 with code that throws checked exceptions. This project provides then the ability to unchecked such
 exceptions before using the code with the stream library, and then check them back again.
 
-<p align="center"><img width="100" src="pics/CC_license.png" alt="This documentation is licensed under a Creative Commons Attribution 4.0 Internat
-ional License"></p><p align="center">This document is licensed under a Creative Commons Attribution 4.0 International License.</p>
-
-<p align="center">Copyright 2023 by Fausto Spoto (fausto.spoto@hotmoka.io)</p>
-
 ## Example
 
 Assume that we want to filter the strings in a collection that satisfy a given `test()`:
@@ -51,3 +46,8 @@ CheckRunnable.check(MyCheckedException.class, () ->
   set.stream().filter(UncheckPredicate.uncheck(this::test)).forEach(System.out::println)
 );
 ```
+
+<p align="center"><img width="100" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" alt="This documentation is licensed under a Creative Commons Attribution 4.0 Internat
+ional License"></p><p align="center">This document is licensed under a Creative Commons Attribution 4.0 International License.</p>
+
+<p align="center">Copyright 2024 by Fausto Spoto (fausto.spoto@hotmoka.io)</p>
