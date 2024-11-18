@@ -34,8 +34,8 @@ private boolean test(String s) throws MyCheckedException {
 
 This is because the `filter()` method requires an implementation of the functional interface
 `java.util.function.Predicate`, whose only method is declared to throw no checked exceptions.
-This module allows one to uncheck the `MyCheckedException` before passing `test()` to `filter()`, and then
-check it back after the stream is closed:
+This module allows one to uncheck any checked exception before passing `test()` to `filter()`, and then
+check `MyCheckedException` back after the stream is closed:
 
 ```java
 private boolean test(String s) throws MyCheckedException {
@@ -46,6 +46,19 @@ CheckRunnable.check(MyCheckedException.class, () ->
   set.stream().filter(UncheckPredicate.uncheck(this::test)).forEach(System.out::println)
 );
 ```
+
+It is also possible to specify the exact exception types that must be unchecked:
+
+
+```java
+CheckRunnable.check(MyCheckedException.class, () ->
+  set.stream().filter(UncheckPredicate.uncheck(MyCheckedException.class, this::test)).forEach(System.out::println)
+);
+```
+
+This option has the advantage that checked exceptions are not silently swallowed, unless this is explicitly
+stated in the code. For instance, the code won't compile if, in the future, `test()` will turn out to throw
+a second type of checked exceptions.
 
 <p align="center"><img width="100" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" alt="This documentation is licensed under a Creative Commons Attribution 4.0 Internat
 ional License"></p><p align="center">This document is licensed under a Creative Commons Attribution 4.0 International License.</p>
