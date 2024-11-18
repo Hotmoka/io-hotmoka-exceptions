@@ -18,6 +18,15 @@ package io.hotmoka.exceptions;
 
 import java.util.function.Supplier;
 
+import io.hotmoka.exceptions.functions.SupplierWithExceptions;
+import io.hotmoka.exceptions.functions.SupplierWithExceptions1;
+import io.hotmoka.exceptions.functions.SupplierWithExceptions2;
+import io.hotmoka.exceptions.functions.SupplierWithExceptions3;
+import io.hotmoka.exceptions.functions.SupplierWithExceptions4;
+import io.hotmoka.exceptions.functions.SupplierWithExceptions5;
+import io.hotmoka.exceptions.functions.SupplierWithExceptions6;
+import io.hotmoka.exceptions.functions.SupplierWithExceptions7;
+
 /**
  * This class provides a method to transform a supplier with exceptions
  * into a supplier, by unchecking its exceptions.
@@ -52,6 +61,315 @@ public abstract class UncheckSupplier {
 						Thread.currentThread().interrupt();
 
 					throw new UncheckedException(e);
+				}
+			}
+		};
+	}
+
+	/**
+	 * Transforms a supplier with exceptions into a supplier without checked
+	 * exceptions. This means that all checked exceptions get wrapped into
+	 * a {@link UncheckedException}. They can later be recovered through
+	 * a method from {@link CheckRunnable} or {@link CheckSupplier}.
+	 * 
+	 * @param <T> the type of the supplied value
+	 * @param <E> the type of exceptions that get unchecked
+	 * @param exception the exception tag of {@code E}
+	 * @param wrapped the supplier with exceptions
+	 * @return the supplier without exceptions
+	 */
+	public static <T, E extends Throwable> Supplier<T> uncheck(Class<E> exception, SupplierWithExceptions1<? extends T, E> wrapped) {
+		return new Supplier<>() {
+
+			@Override
+			public T get() {
+				try {
+					return wrapped.get();
+				}
+				catch (RuntimeException | Error e) {
+					throw e;
+				}
+				catch (Throwable e) {
+					if (e instanceof InterruptedException)
+						Thread.currentThread().interrupt();
+
+					if (exception.isInstance(e))
+						throw new UncheckedException(e);
+					else
+						throw new RuntimeException("Unexpected exception", e);
+				}
+			}
+		};
+	}
+
+	/**
+	 * Transforms a supplier with exceptions into a supplier without checked
+	 * exceptions. This means that all checked exceptions get wrapped into
+	 * a {@link UncheckedException}. They can later be recovered through
+	 * a method from {@link CheckRunnable} or {@link CheckSupplier}.
+	 * 
+	 * @param <T> the type of the supplied value
+	 * @param <E1> the first type of exceptions that get unchecked
+	 * @param <E2> the second type of exceptions that get unchecked
+	 * @param exception1 the exception tag of {@code E1}
+	 * @param exception2 the exception tag of {@code E2}
+	 * @param wrapped the supplier with exceptions
+	 * @return the supplier without exceptions
+	 */
+	public static <T, E1 extends Throwable, E2 extends Throwable> Supplier<T> uncheck(Class<E1> exception1, Class<E2> exception2, SupplierWithExceptions2<? extends T, E1, E2> wrapped) {
+		return new Supplier<>() {
+
+			@Override
+			public T get() {
+				try {
+					return wrapped.get();
+				}
+				catch (RuntimeException | Error e) {
+					throw e;
+				}
+				catch (Throwable e) {
+					if (e instanceof InterruptedException)
+						Thread.currentThread().interrupt();
+
+					if (exception1.isInstance(e) || exception2.isInstance(e))
+						throw new UncheckedException(e);
+					else
+						throw new RuntimeException("Unexpected exception", e);
+				}
+			}
+		};
+	}
+
+	/**
+	 * Transforms a supplier with exceptions into a supplier without checked
+	 * exceptions. This means that all checked exceptions get wrapped into
+	 * a {@link UncheckedException}. They can later be recovered through
+	 * a method from {@link CheckRunnable} or {@link CheckSupplier}.
+	 * 
+	 * @param <T> the type of the supplied value
+	 * @param <E1> the first type of exceptions that get unchecked
+	 * @param <E2> the second type of exceptions that get unchecked
+	 * @param <E3> the third type of exceptions that get unchecked
+	 * @param exception1 the exception tag of {@code E1}
+	 * @param exception2 the exception tag of {@code E2}
+	 * @param exception3 the exception tag of {@code E3}
+	 * @param wrapped the supplier with exceptions
+	 * @return the supplier without exceptions
+	 */
+	public static <T, E1 extends Throwable, E2 extends Throwable, E3 extends Throwable> Supplier<T> uncheck
+			(Class<E1> exception1, Class<E2> exception2, Class<E3> exception3,
+					SupplierWithExceptions3<? extends T, E1, E2, E3> wrapped) {
+
+		return new Supplier<>() {
+
+			@Override
+			public T get() {
+				try {
+					return wrapped.get();
+				}
+				catch (RuntimeException | Error e) {
+					throw e;
+				}
+				catch (Throwable e) {
+					if (e instanceof InterruptedException)
+						Thread.currentThread().interrupt();
+
+					if (exception1.isInstance(e) || exception2.isInstance(e) || exception3.isInstance(e))
+						throw new UncheckedException(e);
+					else
+						throw new RuntimeException("Unexpected exception", e);
+				}
+			}
+		};
+	}
+
+	/**
+	 * Transforms a supplier with exceptions into a supplier without checked
+	 * exceptions. This means that all checked exceptions get wrapped into
+	 * a {@link UncheckedException}. They can later be recovered through
+	 * a method from {@link CheckRunnable} or {@link CheckSupplier}.
+	 * 
+	 * @param <T> the type of the supplied value
+	 * @param <E1> the first type of exceptions that get unchecked
+	 * @param <E2> the second type of exceptions that get unchecked
+	 * @param <E3> the third type of exceptions that get unchecked
+	 * @param <E4> the fourth type of exceptions that get unchecked
+	 * @param exception1 the exception tag of {@code E1}
+	 * @param exception2 the exception tag of {@code E2}
+	 * @param exception3 the exception tag of {@code E3}
+	 * @param exception4 the exception tag of {@code E4}
+	 * @param wrapped the supplier with exceptions
+	 * @return the supplier without exceptions
+	 */
+	public static <T, E1 extends Throwable, E2 extends Throwable, E3 extends Throwable, E4 extends Throwable> Supplier<T> uncheck
+			(Class<E1> exception1, Class<E2> exception2, Class<E3> exception3, Class<E4> exception4,
+					SupplierWithExceptions4<? extends T, E1, E2, E3, E4> wrapped) {
+
+		return new Supplier<>() {
+
+			@Override
+			public T get() {
+				try {
+					return wrapped.get();
+				}
+				catch (RuntimeException | Error e) {
+					throw e;
+				}
+				catch (Throwable e) {
+					if (e instanceof InterruptedException)
+						Thread.currentThread().interrupt();
+
+					if (exception1.isInstance(e) || exception2.isInstance(e) || exception3.isInstance(e) || exception4.isInstance(e))
+						throw new UncheckedException(e);
+					else
+						throw new RuntimeException("Unexpected exception", e);
+				}
+			}
+		};
+	}
+
+	/**
+	 * Transforms a supplier with exceptions into a supplier without checked
+	 * exceptions. This means that all checked exceptions get wrapped into
+	 * a {@link UncheckedException}. They can later be recovered through
+	 * a method from {@link CheckRunnable} or {@link CheckSupplier}.
+	 * 
+	 * @param <T> the type of the supplied value
+	 * @param <E1> the first type of exceptions that get unchecked
+	 * @param <E2> the second type of exceptions that get unchecked
+	 * @param <E3> the third type of exceptions that get unchecked
+	 * @param <E4> the fourth type of exceptions that get unchecked
+	 * @param <E5> the fifth type of exceptions that get unchecked
+	 * @param exception1 the exception tag of {@code E1}
+	 * @param exception2 the exception tag of {@code E2}
+	 * @param exception3 the exception tag of {@code E3}
+	 * @param exception4 the exception tag of {@code E4}
+	 * @param exception5 the exception tag of {@code E5}
+	 * @param wrapped the supplier with exceptions
+	 * @return the supplier without exceptions
+	 */
+	public static <T, E1 extends Throwable, E2 extends Throwable, E3 extends Throwable, E4 extends Throwable, E5 extends Throwable> Supplier<T> uncheck
+			(Class<E1> exception1, Class<E2> exception2, Class<E3> exception3, Class<E4> exception4, Class<E5> exception5,
+					SupplierWithExceptions5<? extends T, E1, E2, E3, E4, E5> wrapped) {
+
+		return new Supplier<>() {
+
+			@Override
+			public T get() {
+				try {
+					return wrapped.get();
+				}
+				catch (RuntimeException | Error e) {
+					throw e;
+				}
+				catch (Throwable e) {
+					if (e instanceof InterruptedException)
+						Thread.currentThread().interrupt();
+
+					if (exception1.isInstance(e) || exception2.isInstance(e) || exception3.isInstance(e) || exception4.isInstance(e) || exception5.isInstance(e))
+						throw new UncheckedException(e);
+					else
+						throw new RuntimeException("Unexpected exception", e);
+				}
+			}
+		};
+	}
+
+	/**
+	 * Transforms a supplier with exceptions into a supplier without checked
+	 * exceptions. This means that all checked exceptions get wrapped into
+	 * a {@link UncheckedException}. They can later be recovered through
+	 * a method from {@link CheckRunnable} or {@link CheckSupplier}.
+	 * 
+	 * @param <T> the type of the supplied value
+	 * @param <E1> the first type of exceptions that get unchecked
+	 * @param <E2> the second type of exceptions that get unchecked
+	 * @param <E3> the third type of exceptions that get unchecked
+	 * @param <E4> the fourth type of exceptions that get unchecked
+	 * @param <E5> the fifth type of exceptions that get unchecked
+	 * @param <E6> the sixth type of exceptions that get unchecked
+	 * @param exception1 the exception tag of {@code E1}
+	 * @param exception2 the exception tag of {@code E2}
+	 * @param exception3 the exception tag of {@code E3}
+	 * @param exception4 the exception tag of {@code E4}
+	 * @param exception5 the exception tag of {@code E5}
+	 * @param exception6 the exception tag of {@code E6}
+	 * @param wrapped the supplier with exceptions
+	 * @return the supplier without exceptions
+	 */
+	public static <T, E1 extends Throwable, E2 extends Throwable, E3 extends Throwable, E4 extends Throwable, E5 extends Throwable, E6 extends Throwable> Supplier<T> uncheck
+			(Class<E1> exception1, Class<E2> exception2, Class<E3> exception3, Class<E4> exception4, Class<E5> exception5, Class<E6> exception6,
+					SupplierWithExceptions6<? extends T, E1, E2, E3, E4, E5, E6> wrapped) {
+
+		return new Supplier<>() {
+
+			@Override
+			public T get() {
+				try {
+					return wrapped.get();
+				}
+				catch (RuntimeException | Error e) {
+					throw e;
+				}
+				catch (Throwable e) {
+					if (e instanceof InterruptedException)
+						Thread.currentThread().interrupt();
+
+					if (exception1.isInstance(e) || exception2.isInstance(e) || exception3.isInstance(e) || exception4.isInstance(e) || exception5.isInstance(e) || exception6.isInstance(e))
+						throw new UncheckedException(e);
+					else
+						throw new RuntimeException("Unexpected exception", e);
+				}
+			}
+		};
+	}
+
+	/**
+	 * Transforms a supplier with exceptions into a supplier without checked
+	 * exceptions. This means that all checked exceptions get wrapped into
+	 * a {@link UncheckedException}. They can later be recovered through
+	 * a method from {@link CheckRunnable} or {@link CheckSupplier}.
+	 * 
+	 * @param <T> the type of the supplied value
+	 * @param <E1> the first type of exceptions that get unchecked
+	 * @param <E2> the second type of exceptions that get unchecked
+	 * @param <E3> the third type of exceptions that get unchecked
+	 * @param <E4> the fourth type of exceptions that get unchecked
+	 * @param <E5> the fifth type of exceptions that get unchecked
+	 * @param <E6> the sixth type of exceptions that get unchecked
+	 * @param <E7> the seventh type of exceptions that get unchecked
+	 * @param exception1 the exception tag of {@code E1}
+	 * @param exception2 the exception tag of {@code E2}
+	 * @param exception3 the exception tag of {@code E3}
+	 * @param exception4 the exception tag of {@code E4}
+	 * @param exception5 the exception tag of {@code E5}
+	 * @param exception6 the exception tag of {@code E6}
+	 * @param exception7 the exception tag of {@code E7}
+	 * @param wrapped the supplier with exceptions
+	 * @return the supplier without exceptions
+	 */
+	public static <T, E1 extends Throwable, E2 extends Throwable, E3 extends Throwable, E4 extends Throwable, E5 extends Throwable, E6 extends Throwable, E7 extends Throwable> Supplier<T> uncheck
+			(Class<E1> exception1, Class<E2> exception2, Class<E3> exception3, Class<E4> exception4, Class<E5> exception5, Class<E6> exception6, Class<E7> exception7,
+					SupplierWithExceptions7<? extends T, E1, E2, E3, E4, E5, E6, E7> wrapped) {
+
+		return new Supplier<>() {
+
+			@Override
+			public T get() {
+				try {
+					return wrapped.get();
+				}
+				catch (RuntimeException | Error e) {
+					throw e;
+				}
+				catch (Throwable e) {
+					if (e instanceof InterruptedException)
+						Thread.currentThread().interrupt();
+
+					if (exception1.isInstance(e) || exception2.isInstance(e) || exception3.isInstance(e) || exception4.isInstance(e) || exception5.isInstance(e) || exception6.isInstance(e) || exception7.isInstance(e))
+						throw new UncheckedException(e);
+					else
+						throw new RuntimeException("Unexpected exception", e);
 				}
 			}
 		};

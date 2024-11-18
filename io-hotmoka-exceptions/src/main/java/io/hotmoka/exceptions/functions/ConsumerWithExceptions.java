@@ -14,20 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package io.hotmoka.exceptions;
+package io.hotmoka.exceptions.functions;
 
 /**
- * A supplier that might throw exceptions.
+ * A consumer that might throw exceptions.
  * 
- * @param <T> the type of the supplied value
+ * @param <T> the type of the consumed value
  */
-public interface SupplierWithExceptions<T> {
+public interface ConsumerWithExceptions<T> {
 
 	/**
-	 * Supplies a value.
+	 * Consumes the given argument.
 	 *
-	 * @return the supplied value
-	 * @throws Throwable any exception thrown by the supplier
+	 * @param t the argument
+	 * @throws Throwable any exception thrown by the consumer
 	 */
-	T get() throws Throwable;
+	void accept(T t) throws Throwable;
 }

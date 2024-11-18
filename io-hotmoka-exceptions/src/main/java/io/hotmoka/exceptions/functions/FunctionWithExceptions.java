@@ -14,10 +14,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+package io.hotmoka.exceptions.functions;
+
 /**
- * This module defines methods for dealing with functional interfaces that might throw exceptions.
+ * A function that might throw exceptions.
+ * 
+ * @param <T> the type of the parameter of the function
+ * @param <R> the type of the result of the function
  */
-module io.hotmoka.exceptions {
-	exports io.hotmoka.exceptions;
-	exports io.hotmoka.exceptions.functions;
+public interface FunctionWithExceptions<T, R> {
+
+	/**
+	 * Applies the function.
+	 * 
+	 * @param t the argument to the function
+	 * @return the result of the function
+	 * @throws Throwable any exception thrown by the function
+	 */
+	R apply(T t) throws Throwable;
 }

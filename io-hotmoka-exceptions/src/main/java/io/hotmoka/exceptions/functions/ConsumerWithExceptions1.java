@@ -1,5 +1,5 @@
 /*
-Copyright 2023 Fausto Spoto
+Copyright 2024 Fausto Spoto
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,10 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+package io.hotmoka.exceptions.functions;
+
 /**
- * This module defines methods for dealing with functional interfaces that might throw exceptions.
+ * A consumer that might throw exceptions.
+ * 
+ * @param <T> the type of the consumed value
+ * @param <E> the type of exceptions
  */
-module io.hotmoka.exceptions {
-	exports io.hotmoka.exceptions;
-	exports io.hotmoka.exceptions.functions;
+public interface ConsumerWithExceptions1<T, E extends Throwable> {
+
+	/**
+	 * Consumes the given argument.
+	 *
+	 * @param t the argument
+	 * @throws E any exception thrown by the consumer
+	 */
+	void accept(T t) throws E;
 }
