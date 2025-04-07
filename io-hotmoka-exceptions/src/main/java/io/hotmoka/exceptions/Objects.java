@@ -19,7 +19,9 @@ package io.hotmoka.exceptions;
 /**
  * A collection of run-time checks on objects, with parametric exception type.
  */
-public class Objects {
+public abstract class Objects {
+
+	private Objects() {}
 
 	/**
      * Checks that the specified object reference is not {@code null}. This
