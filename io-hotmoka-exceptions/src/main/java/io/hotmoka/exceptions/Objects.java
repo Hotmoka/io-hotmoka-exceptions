@@ -40,7 +40,7 @@ public abstract class Objects {
      * @return {@code obj} if not {@code null}
      * @throws E if {@code obj} is {@code null}
      */
-    public static <T, E extends Exception> T requireNonNull(T obj, ExceptionSupplier<? extends E> onNull) throws E {
+    public static <T, E extends Exception> T requireNonNull(T obj, ExceptionSupplierFromMessage<? extends E> onNull) throws E {
         if (obj == null)
             throw onNull.apply("Illegal null value");
 
@@ -65,7 +65,7 @@ public abstract class Objects {
      * @return {@code obj} if not {@code null}
      * @throws E if {@code obj} is {@code null}
      */
-    public static <T, E extends Exception> T requireNonNull(T obj, String message, ExceptionSupplier<? extends E> onNull) throws E {
+    public static <T, E extends Exception> T requireNonNull(T obj, String message, ExceptionSupplierFromMessage<? extends E> onNull) throws E {
         if (obj == null)
             throw onNull.apply(message);
 

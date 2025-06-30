@@ -1,12 +1,11 @@
 package io.hotmoka.exceptions;
 
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
- * A supplier of an exception. It is a function from the message of the exception
- * to the supplied exception.
+ * A supplier of an exception.
  * 
  * @param <E> the type of the supplied exception
  */
-public interface ExceptionSupplier<E extends Exception> extends Function<String, E> {
+public interface ExceptionSupplier<E extends Exception> extends Supplier<E> {
 }
